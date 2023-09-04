@@ -1,0 +1,75 @@
+use database
+
+// show dbs
+
+db.createCollection("collectionname")
+
+db.dropDatabase()
+
+db.collectionname.drop()
+*/
+//files adding command
+
+db.collectionname.find()       // to show the datas
+
+
+db.collectionname.insertOne({
+    name:'JSR',
+    age:'20',
+    rollno:'1234',
+})
+
+db.collectionname.insertOne({
+    name:'Jitendra',
+})
+
+
+db.collectionname.insertOne({
+    name:'J',
+    age:'20',
+    rollno:'1234',
+},{
+    name:'S',
+    age:'21',
+    rollno:'2345',
+}
+)          // by this only first one is added
+
+
+db.collectionname.insertMany([{
+    name:'JS',
+    age:'20',
+    rollno:'1234',
+},{
+    name:'SR',
+    age:'21',
+    rollno:'2345',
+}]
+) 
+
+
+in the data.json to find the brand appple
+use products
+then db.electronics.find({brand:'Apple'})
+
+to show prices of data with brand as apple
+
+db.electronics.find({brand:'Apple'},{price:1})
+  { _id: ObjectId("64f5c04afffd57dc25da1231"), price: 549 },
+  { _id: ObjectId("64f5c04afffd57dc25da1232"), price: 899 },
+  { _id: ObjectId("64f5c04afffd57dc25da1236"), price: 1749 }
+
+db.electronics.find({brand:'Apple'},{_id:0,price:1})
+{ price: 549 }, { price: 899 }, { price: 1749 }
+
+to count the no. of apple brands
+db.electronics.find({brand:'Apple'}).count()
+
+
+
+
+
+
+
+
+mongosh "mongodb+srv://cluster0.vlkcaeb.mongodb.net/" --apiVersion 1 --username jitendra
