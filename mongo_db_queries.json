@@ -69,7 +69,7 @@ db.electronics.find({brand:'Apple'}).count()
 Questions to do:-
 1. 15% se jyada discount waalo ka title price brands
 
-db.electronics.find({discountPercentage:{$gt:15}})
+db.electronics.find({discountPercentage:{$gt:15}})   // can also be written as db.electronics.find({"discountPercentage":{$gt:15}})
 
 2. jinka category laptop unko print karna
 
@@ -83,4 +83,39 @@ db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for desc
 
 
 
+** comparison operators:
 
+$eq:-  equalss to
+$neq:-  not equals to
+$gt:-   greater than
+$gte:-  greater than equals to
+$lt:-  less than
+$lte:-  less than equals to
+$in:-  inside
+$nin:-  not inside
+
+
+
+* to show those have price = 60, 20, 80
+
+=>db.electronics.find({price:{$in:[60,20,80]}})
+
+* to show those not have price = 60, 20, 80
+
+=>db.electronics.find({price:{$nin:[60,20,80]}})
+
+** cursor methods
+
+count()
+limit()
+skip()
+sort()  1 for ascending and -1 for descending
+
+* 5 data price is greater than 250 
+* shuruat ke 2 data ko skip karna
+
+
+* woh saari price greater than 100 and brand is apple
+* price is 100 or 200
+* what is average price of all data
+* price between 30 to 50
