@@ -66,10 +66,15 @@ to count the no. of apple brands
 db.electronics.find({brand:'Apple'}).count()
 
 
+Questions to do:-
+1. 15% se jyada discount waalo ka title price brands
+
+2. jinka brand laptop unko print karna
+
+3. 5 products ko iss tarah se ki highest discount waala highest par
 
 
 
 
 
 
-mongosh "mongodb+srv://cluster0.vlkcaeb.mongodb.net/" --apiVersion 1 --username jitendra
