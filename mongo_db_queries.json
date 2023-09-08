@@ -69,9 +69,15 @@ db.electronics.find({brand:'Apple'}).count()
 Questions to do:-
 1. 15% se jyada discount waalo ka title price brands
 
-2. jinka brand laptop unko print karna
+db.electronics.find({discountPercentage:{$gt:15}})
+
+2. jinka category laptop unko print karna
+
+db.electronics.find({category:'laptops'})
 
 3. 5 products ko iss tarah se ki highest discount waala highest par
+
+db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for descending order i.e. highest to loweest and limit is for providing the 5 results
 
 
 
