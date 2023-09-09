@@ -4,9 +4,9 @@ use database
 
 db.createCollection("collectionname")
 
-db.dropDatabase()
+db.dropDatabase() // to drop the database
 
-db.collectionname.drop()
+db.collectionname.drop() // to drop the collection
 */
 //files adding command
 
@@ -77,7 +77,7 @@ db.electronics.find({category:'laptops'})
 
 3. 5 products ko iss tarah se ki highest discount waala highest par
 
-db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for descending order i.e. highest to loweest and limit is for providing the 5 results
+db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for descending order i.e. highest to lowest and limit is for providing the 5 results and if we write 1 we get ascending results nad 0 gives invalid sort order
 
 
 
@@ -113,10 +113,11 @@ sort()  1 for ascending and -1 for descending
 
 * 5 data price is greater than 250 
 =>db.electronics.find({price:{$gt:250}}).sort({price:-1}) // for all
+=>db.electronics.find({price:{$gt:250}}).limit(5) // show those in order of the id ascending
 =>db.electronics.find({price:{$gt:250}}).sort({price:-1}).limit(5) // for top 5
 
 * shuruat ke 2 data ko skip karna
-=>db.electronics.find().skip(2)          // now of the 30 data first 2 are skipped and from 3rd will be shown 
+=>db.electronics.find().skip(2)          // now of the 30 data first 2 are skipped and from 3rd will be shown  i.e 28 datas
 
 
 * woh saari price greater than 100 and brand is apple
@@ -137,3 +138,117 @@ sort()  1 for ascending and -1 for descending
 
 * price between 30 to 50
 =>db.electronics.find({price:{$gt:30,$lt:50}})
+
+
+** Logical Operators
+
+$,,& is called stages 
+$and:- and
+$or:- or
+$not:- not
+$nor:- nor
+
+* to show those whose price is greater than 900 and rating is greater than 4
+=>db.electronics.find({$and:[{price:{$gt:900}},{rating:{$gt:4}}]})
+
+
+** to delete the data
+
+db.electronics.deleteOne({brand:"Apple"})
+db.electronics.deleteMany({brand:"Apple"})
+
+db.electronics.deleteOne({price:{$gte:900}})
+db.electronics.deleteMany({price:{$gte:900}})
+
+
+** Element operators
+
+$exists
+Eg. if the price exists than find there count
+db.electronics.find({price:{$exists:true}}).count()
+ques- 1250 waali price exist nahi karti unko print karo
+db.electronics.find({$and:[{price:{$exists:true}},{price:{$gte:1250}}]}).count()
+db.electronics.find({$and:[{price:{$exists:false}},{price:{$gte:1250}}]}).count()
+
+$type
+Eg. if you have accidentally put the price as "50" instead of price as 50
+db.electronics.find({price:{$type:'string'}}).count() //0
+db.electronics.find({price:{$type:'number'}}).count() //30
+db.electronics.find({images:{$type:'string'}}).count() //30
+
+$size
+Eg. 
+
+
+
+
+* to show the prouduct with id as 5
+=>db.electronics.find({id:5})
+
+* to show the prouduct with _id
+=>db.electronics.find({_id:ObjectId("64f5c04afffd57dc25da1235")})
+
+* list all the products from laptops category
+=>db.electronics.find({category:"laptops"})
+
+*retrieve price title and price of discountPercentage items greater than 15%
+=> db.electronics.find({discountPercentage:{$gte:15}},{title:1,price:1,_id:0})              // infind({},{}) first is for filter and second one is for projection and in query 0 for off and 1 for on
+
+* how many brands with Samsung brand
+=>db.electronics.find({brand:"Samsung"}).count()
+
+* how many brands with , with category smartphones
+=> db.electronics.find({$and:[{category:"smartphones"},{rating:{$gte:4.5}}]})
+
+* which brands have products in the fragrances category
+=> db.electronics.find({category:"fragrances"},{brand:1,_id:0}) // it will show brand key also
+[
+    { brand: 'Impression of Acqua Di Gio' },
+    { brand: 'Royal_Mirage' },
+    { brand: 'Fog Scent Xpressio' },
+    { brand: 'Al Munakh' },
+    { brand: 'Lord - Al-Rehab' }
+  ]
+  
+=> db.electronics.distinct("brand",{category:"fragrances"}) // it will also not show brand key
+[
+    'Al Munakh',
+    'Fog Scent Xpressio',
+    'Impression of Acqua Di Gio',
+    'Lord - Al-Rehab',
+    'Royal_Mirage'
+  ]
+
+
+
+**ques
+
+*which brand has products in fragrances category show those products
+=>db.electronics.find({category:'fragrances'},{title:1,price:1,_id:0})
+
+* show all the products in range of price between 1240 to 2000
+=>db.electronics.find({price:{$gt:1240,$lt:2000}})
+
+* stock quantity less than 50
+=>db.electronics.find({price:{$lt:50}})
+
+* show me product where rating is greater than 4 and stock quantity less than 100
+=> db.electronics.find({rating:{$gt:4},stockQuantity:{$lt:100}})
+
+* calculate the average discountPercentage for each brand
+=>db.electronics.aggregate([
+    {
+        $group: {
+            _id: "$brand",
+            averageDiscountPercentage: { $avg: "$discountPercentage" }
+        }
+    }
+    ])
+    
+
+
+* if i want to show only the title and price from database collection
+db.electronics.find({},{title:1,price:1,_id:0})
+
+ mongoose and mongodb are different
+  first node then mongoose 
