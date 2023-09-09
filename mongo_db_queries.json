@@ -112,10 +112,28 @@ skip()
 sort()  1 for ascending and -1 for descending
 
 * 5 data price is greater than 250 
+=>db.electronics.find({price:{$gt:250}}).sort({price:-1}) // for all
+=>db.electronics.find({price:{$gt:250}}).sort({price:-1}).limit(5) // for top 5
+
 * shuruat ke 2 data ko skip karna
+=>db.electronics.find().skip(2)          // now of the 30 data first 2 are skipped and from 3rd will be shown 
 
 
 * woh saari price greater than 100 and brand is apple
-* price is 100 or 200
+=>db.electronics.find({price:{$gt:100},brand:"Apple"})
+
+* price is 100 or 200 
+=>db.electronics.find({price:{$in:[100,200]}})
+
 * what is average price of all data
+=>db.electronics.aggregate([
+    {
+        $group: {
+            _id: null,
+            averagePrice: { $avg: "$price" }
+        }
+    }
+])
+
 * price between 30 to 50
+=>db.electronics.find({price:{$gt:30,$lt:50}})
