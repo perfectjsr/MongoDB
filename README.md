@@ -11,21 +11,45 @@ The mongo_db_queries.json is the file that contains the commands and operations 
 #To show collections present in the database
 * show collections
 
-#To show create a collection in the database
-* show dbs
+#To create a collection in the database
+* db.createCollection("collectionname")
 
-#To show databases present in the database
-* show dbs
+#To drop the collection present in the database
+* db.collectionname.drop()
 
-#To show databases present in the database
-* show dbs
+#To show data present in the collection
+*db.collectionname.find()
 
-#To show databases present in the database
-* show dbs
+#To insert one data in the Collection
+* db.collectionname.insertOne({
+    : ,
+    : ,
+    : ,
+})
 
-#To show databases present in the database
-* show dbs
 
-#To show databases present in the database
-* show dbs
+* db.collectionname.insertOne({
+    : ,
+    : ,
+    : ,
+},{
+    : ,
+    : ,
+    : ,
+}
+)          // by this only first one is added not both
+
+#To insert more than one data in the Collection
+* db.collectionname.insertMany([{
+    : ,
+    : ,
+    : ,
+},{
+    : ,
+    : ,
+    : ,
+}]
+)
+
+
 

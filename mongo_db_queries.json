@@ -1,18 +1,28 @@
-use database
 
-// show dbs
+To switch to the database Products
+use Products
 
+To show databases present in the database
+show dbs
+
+To show collections present in the database
+show collections
+
+To create a collection in the database
 db.createCollection("collectionname")
 
-db.dropDatabase() // to drop the database
+To drop the database
+db.dropDatabase() 
 
-db.collectionname.drop() // to drop the collection
+To drop the collection present in the database
+db.collectionname.drop() 
 */
 //files adding command
 
-db.collectionname.find()       // to show the datas
+To show data present in the collection
+db.collectionname.find()       
 
-
+To insert one data in the Collection
 db.collectionname.insertOne({
     name:'JSR',
     age:'20',
@@ -33,9 +43,9 @@ db.collectionname.insertOne({
     age:'21',
     rollno:'2345',
 }
-)          // by this only first one is added
+)          // by this only first one is added not both
 
-
+To insert more than one data in the Collection
 db.collectionname.insertMany([{
     name:'JS',
     age:'20',
