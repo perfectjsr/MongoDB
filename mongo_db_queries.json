@@ -58,36 +58,37 @@ db.collectionname.insertMany([{
 ) 
 
 
-in the data.json to find the brand appple
-use products
-then db.electronics.find({brand:'Apple'})
+* in the collection electronics to show the brand appple only
+=>use products
+=>db.electronics.find({brand:'Apple'})
 
-to show prices of data with brand as apple
+* to show prices of data with brand as apple
 
-db.electronics.find({brand:'Apple'},{price:1})
-  { _id: ObjectId("64f5c04afffd57dc25da1231"), price: 549 },
+=>db.electronics.find({brand:'Apple'},{price:1})
+  output=>{ _id: ObjectId("64f5c04afffd57dc25da1231"), price: 549 },
   { _id: ObjectId("64f5c04afffd57dc25da1232"), price: 899 },
   { _id: ObjectId("64f5c04afffd57dc25da1236"), price: 1749 }
 
-db.electronics.find({brand:'Apple'},{_id:0,price:1})
-{ price: 549 }, { price: 899 }, { price: 1749 }
+* To show only the price not the objectid
+=>db.electronics.find({brand:'Apple'},{_id:0,price:1})
+ output=>{ price: 549 }, { price: 899 }, { price: 1749 }
 
-to count the no. of apple brands
-db.electronics.find({brand:'Apple'}).count()
+* to count the no. of apple brands
+=> db.electronics.find({brand:'Apple'}).count()
 
 
 Questions to do:-
 1. 15% se jyada discount waalo ka title price brands
 
-db.electronics.find({discountPercentage:{$gt:15}})   // can also be written as db.electronics.find({"discountPercentage":{$gt:15}})
+=> db.electronics.find({discountPercentage:{$gt:15}})   // can also be written as db.electronics.find({"discountPercentage":{$gt:15}})
 
 2. jinka category laptop unko print karna
 
-db.electronics.find({category:'laptops'})
+=> db.electronics.find({category:'laptops'})
 
 3. 5 products ko iss tarah se ki highest discount waala highest par
 
-db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for descending order i.e. highest to lowest and limit is for providing the 5 results and if we write 1 we get ascending results nad 0 gives invalid sort order
+=> db.electronics.find().sort({discountPercentage:-1}).limit(5)   // -1 is for descending order i.e. highest to lowest and limit is for providing the 5 results and if we write 1 we get ascending results nad 0 gives invalid sort order
 
 
 
@@ -164,27 +165,27 @@ $nor:- nor
 
 ** to delete the data
 
-db.electronics.deleteOne({brand:"Apple"})
-db.electronics.deleteMany({brand:"Apple"})
+=> db.electronics.deleteOne({brand:"Apple"})
+=> db.electronics.deleteMany({brand:"Apple"})
 
-db.electronics.deleteOne({price:{$gte:900}})
-db.electronics.deleteMany({price:{$gte:900}})
+=> db.electronics.deleteOne({price:{$gte:900}})
+=> db.electronics.deleteMany({price:{$gte:900}})
 
 
 ** Element operators
 
 $exists
 Eg. if the price exists than find there count
-db.electronics.find({price:{$exists:true}}).count()
+=> db.electronics.find({price:{$exists:true}}).count()
 ques- 1250 waali price exist nahi karti unko print karo
-db.electronics.find({$and:[{price:{$exists:true}},{price:{$gte:1250}}]}).count()
-db.electronics.find({$and:[{price:{$exists:false}},{price:{$gte:1250}}]}).count()
+=> db.electronics.find({$and:[{price:{$exists:true}},{price:{$gte:1250}}]}).count()
+=> db.electronics.find({$and:[{price:{$exists:false}},{price:{$gte:1250}}]}).count()
 
 $type
 Eg. if you have accidentally put the price as "50" instead of price as 50
-db.electronics.find({price:{$type:'string'}}).count() //0
-db.electronics.find({price:{$type:'number'}}).count() //30
-db.electronics.find({images:{$type:'string'}}).count() //30
+=> db.electronics.find({price:{$type:'string'}}).count() //0
+=> db.electronics.find({price:{$type:'number'}}).count() //30
+=> db.electronics.find({images:{$type:'string'}}).count() //30
 
 $size
 Eg. 
@@ -258,7 +259,7 @@ Eg.
 
 
 * if i want to show only the title and price from database collection
-db.electronics.find({},{title:1,price:1,_id:0})
+=> db.electronics.find({},{title:1,price:1,_id:0})
 
  mongoose and mongodb are different
   first node then mongoose 
